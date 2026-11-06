@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Engenharia de IA: estudo para a prova</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:wght@400;600;700&display=swap">
+<style>
+:root{--bg:#eef2f6;--card:#fff;--ink:#14213d;--mut:#51607a;--ac:#0f766e;--acs:#d7efec;--ok:#157347;--oks:#dcf3e5;--bad:#b42318;--bads:#fbe4e1;--ln:#cdd6e2;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1626;--card:#16213a;--ink:#e6ecf7;--mut:#9aa9c4;--ac:#4fd1c5;--acs:#173b45;--ok:#5fd38d;--oks:#143a28;--bad:#ff8a7a;--bads:#47201c;--ln:#2a3a5c}}
+:root[data-theme="dark"]{--bg:#0e1626;--card:#16213a;--ink:#e6ecf7;--mut:#9aa9c4;--ac:#4fd1c5;--acs:#173b45;--ok:#5fd38d;--oks:#143a28;--bad:#ff8a7a;--bads:#47201c;--ln:#2a3a5c}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Literata,Georgia,serif;line-height:1.6;font-size:17px}
+header{background:var(--ink);color:var(--bg);padding:22px 18px 14px}
+header h1{margin:0;font-size:1.5rem;line-height:1.25}
+header p{margin:4px 0 0;opacity:.8;font-size:.9rem}
+nav{display:flex;gap:6px;padding:10px 14px;background:var(--card);border-bottom:1px solid var(--ln);position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
+button{font:inherit;cursor:pointer;color:inherit}
+nav button{flex:1;padding:10px 6px;border:1px solid var(--ln);background:none;border-radius:6px;font-weight:600;font-family:system-ui,sans-serif;font-size:.95rem}
+nav button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+main{max-width:760px;margin:0 auto;padding:16px 14px 60px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.chips button{padding:7px 11px;border:1px solid var(--ln);background:var(--card);border-radius:20px;font-size:.85rem;font-family:system-ui,sans-serif}
+.chips button.on{background:var(--acs);border-color:var(--ac);color:var(--ink);font-weight:700}
+h2{font-size:1.3rem;margin:6px 0 12px}
+details{background:var(--card);border:1px solid var(--ln);border-radius:8px;margin-bottom:8px;padding:0 14px}
+summary{padding:12px 0;font-weight:600;cursor:pointer}
+details p,details li{margin:0 0 10px}
+details ul{padding-left:20px;margin:0 0 6px}
+.q{background:var(--card);border:1px solid var(--ln);border-radius:8px;padding:14px;margin-bottom:12px}
+.q .tag{font-family:system-ui,sans-serif;font-size:.78rem;color:var(--mut);margin-bottom:4px}
+.q p{margin:0 0 10px;font-weight:600}
+.o{display:block;width:100%;text-align:left;padding:10px 12px;margin-bottom:6px;border:1px solid var(--ln);background:none;border-radius:6px;font-size:.95rem}
+.o.sel{border-color:var(--ac);background:var(--acs)}
+.o.right{border-color:var(--ok);background:var(--oks)}
+.o.wrong{border-color:var(--bad);background:var(--bads)}
+.ex{font-size:.9rem;color:var(--mut);margin-top:8px;border-left:3px solid var(--ac);padding-left:10px}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px;font-family:system-ui,sans-serif;font-size:.9rem}
+.bar select,.go{padding:9px 12px;border-radius:6px;border:1px solid var(--ln);background:var(--card);color:var(--ink);font:inherit}
+.go{background:var(--ac);color:#fff;border-color:var(--ac);font-weight:700}
+.res{background:var(--ink);color:var(--bg);border-radius:8px;padding:16px;margin-bottom:14px;font-family:system-ui,sans-serif}
+.res b{font-size:1.6rem}
+:focus-visible{outline:3px solid var(--ac);outline-offset:2px}
+</style>
+</head>
+<body>
+<header><h1>Engenharia de IA: preparação para a prova</h1><p>Teoria por módulos, revisão com resposta imediata e simulados V/F e múltipla escolha</p></header>
+<nav id="nav"></nav>
+<main id="app"></main>
+<script>
+const M=[
+{n:"1. Surgimento e casos de uso",s:[
+{t:"Escala e Model as a Service",p:["A principal mudança pós-2020 é a escala de modelos, dados e computação. Treinar modelos de fronteira concentra-se em poucas organizações, que oferecem modelos por API (Model as a Service), reduzindo a barreira de entrada.","GPT (2018) tinha 117 milhões de parâmetros e GPT-2 (2019), 1,5 bilhão. O que é “large” é relativo ao momento tecnológico."]},
+{t:"Modelos de linguagem, tokens e self-supervision",p:["Modelo de linguagem estima os tokens mais prováveis em um contexto. Token é a unidade básica (caractere, palavra ou subpalavra); vocabulário é o conjunto de tokens representáveis.","Mascarado (ex.: BERT): prevê tokens ausentes usando contexto anterior e posterior. Autorregressivo: prevê o próximo token usando só os anteriores, ideal para geração.","Self-supervision: os rótulos são derivados do próprio dado (o próximo token). Não é o mesmo que aprendizado não supervisionado e elimina o gargalo de rotulagem.","Hierarquia: IA contém ML, que contém redes neurais; Transformers são redes baseadas em atenção; LLMs são modelos de linguagem em larga escala, hoje majoritariamente Transformers."]},
+{t:"Foundation models e Engenharia de IA",p:["Foundation models servem de base a várias aplicações e incluem LLMs e modelos multimodais. A pergunta passa de “como treinar?” para “como adaptar?”.","Adaptação: prompt engineering, RAG (fontes externas) e finetuning (continuar o treino com dados específicos). Podem ser combinadas.","Engenharia de IA constrói aplicações sobre modelos existentes (selecionar, adaptar, integrar, avaliar, operar), diferente do ML Engineering tradicional, que treina modelos próprios. Decisão build vs. buy: API comercial, open source hospedado ou modelo próprio."]},
+{t:"Casos de uso e risco",p:["Casos: coding, imagem e vídeo, escrita (estudo do MIT: 40% menos tempo, 18% mais qualidade), educação, bots conversacionais, agregação e organização de informação, automação e agentes.","Tarefa “exposta”: IA reduz em pelo menos 50% o tempo de execução. Empresas implantam primeiro aplicações internas e tarefas fechadas (classificação), mais fáceis de avaliar.","Responder é diferente de agir: agentes usam ferramentas e geram consequências reais, aumentando o risco. Um ótimo modelo não garante um ótimo sistema."]}]},
+{n:"2. Modelos de fundação",s:[
+{t:"Dados de treinamento",p:["A capacidade depende dos dados. Common Crawl e C4 são abundantes, mas trazem ruído, desinformação e viés. Mais dados não é sempre melhor: qualidade, diversidade e alinhamento ao domínio importam.","O inglês domina a web; línguas pouco representadas têm desempenho menor, e a tokenização pode exigir mais tokens para o mesmo significado. Domínios específicos (medicina, direito) exigem dados e métricas próprios."]},
+{t:"Arquitetura e escala",p:["Do seq2seq com RNN (sequencial) ao Transformer, que usa atenção e processa tokens em paralelo. Atenção usa Query, Key e Value; contexto longo aumenta memória.","Bloco Transformer: atenção + MLP/feedforward, empilhado; embeddings na entrada e camada de saída sobre o vocabulário.","Três números: parâmetros (capacidade), tokens de treino e FLOPs (custo). Um modelo de 7B em 16 bits precisa de cerca de 14 GB só para os pesos.","Modelos densos usam quase todos os parâmetros; em Mixture-of-Experts cada token aciona poucos especialistas (separar parâmetros totais de ativos). Chinchilla: tokens de treino perto de 20 vezes o número de parâmetros. Gargalos: dados, energia e custo."]},
+{t:"Pré-treinamento e pós-treinamento",p:["Pré-treinamento: prever tokens e capturar padrões gerais (conhecimento). Pós-treinamento alinha o modelo ao uso.","SFT: pares prompt e resposta de demonstração; transforma completador em assistente (clonagem de comportamento).","Preference finetuning: RLHF usa feedback humano, reward model e reforço; DPO otimiza diretamente preferências. Dados de comparação: prompt, resposta vencedora, resposta perdedora."]},
+{t:"Sampling e saídas estruturadas",p:["O modelo gera token a token amostrando de uma distribuição. Greedy escolhe o mais provável. Temperatura alta aumenta variabilidade; baixa aumenta consistência. Top-k limita aos k mais prováveis; top-p usa o menor conjunto com probabilidade acumulada p.","Best-of-N gera várias respostas e escolhe a melhor, com custo proporcional a N.","Saída estruturada (JSON, SQL): prompting, pós-processamento, constrained sampling (gramática) e finetuning. A natureza probabilística gera inconsistência e alucinação (conteúdo não fundamentado)."]}]},
+{n:"3. Práticas: Groq, visão e estruturação",s:[
+{t:"API de chat da Groq",p:["client.chat.completions.create recebe model e messages com papéis system, user e assistant. Em um chat, o histórico é mantido manualmente na lista de mensagens.","Parâmetros: temperature (variação), max_completion_tokens (limite) e reasoning_effort=none (desliga raciocínio interno). Temperatura 0 para tarefas determinísticas."]},
+{t:"Multimodal e modelo local",p:["Imagem é enviada como data URL em base64 dentro de image_url. O prompt pede listar o que é visível, o incerto e ilegível.","Localmente, llama_cpp carrega modelos GGUF (ex.: Qwen2.5 0.5B texto, Qwen2.5-VL 3B visão com projetor multimodal mmproj) e usa create_chat_completion."]},
+{t:"O modelo não é um chatbot",p:["response_format json_object força JSON, lido com json.loads. Pydantic (BaseModel, Literal, Optional) valida o contrato na aplicação; o prompt descreve, o Pydantic valida.","Classificação zero-shot usa só instruções; few-shot inclui exemplos no prompt, sem alterar pesos. A saída do modelo alimenta regras de negócio em Python (rotas, validações), como na triagem de chamados de TI com categorias HARDWARE, SOFTWARE, REDE, ACESSO, OUTROS."]}]},
+{n:"4. RAG com FAISS",s:[
+{t:"Pipeline",p:["documentos, chunks, embeddings, índice FAISS, recuperação, contexto, LLM, resposta.","Chunking por palavras com tamanho 55 e overlap 12 (o início avança 43). Embeddings com paraphrase-multilingual-MiniLM-L12-v2, dimensão 384, normalizados; IndexFlatIP com vetores normalizados equivale a cosseno.","O retriever não usa LLM. Sem RAG o modelo responde sem evidência; com RAG recebe trechos citáveis como [Fonte X]."]},
+{t:"Limites da busca vetorial",p:["FAISS sempre devolve os vizinhos mais próximos, mesmo sem evidência suficiente; por isso o prompt manda responder “não encontrei” e o grafo usa limiar de score.","Prompt injection: texto recuperado pode conter instruções. O contexto deve ser tratado como dado não confiável, com delimitadores e system prompt defensivo, mas isso não é isolamento de segurança; ferramentas exigem controles fora do modelo."]},
+{t:"Tamanho do índice",p:["Tamanho aproximado = número de chunks × dimensão × 4 bytes (float32). Menos texto indexado gera menos chunks, menos embeddings e índice menor."]}]},
+{n:"5. LangGraph e engenharia de prompt",s:[
+{t:"Conceitos do LangGraph",p:["State (TypedDict) é o dado compartilhado; Node é função que recebe o estado e devolve só os campos a atualizar; Edge liga etapas; START e END marcam início e fim. Fluxo: StateGraph, add_node, add_edge, compile, invoke.","add_conditional_edges roteia conforme uma função (ex.: score_maximo maior ou igual ao limiar leva a gerar resposta; senão, nó sem evidência, sem chamar o LLM). O limiar é didático e deve ser calibrado por embedding, base e domínio.","stream com stream_mode updates mostra o que cada nó acrescenta ao estado; get_graph().draw_mermaid() mostra a estrutura."]},
+{t:"Anatomia do prompt",p:["Prompt de aplicação = papel + tarefa + contexto + restrições + contrato de saída. System guarda papel e regras permanentes; user traz contexto e pergunta. Delimitadores (como contexto e pergunta entre marcas) organizam, mas não são barreira de segurança.","Zero-shot x few-shot; persona muda perspectiva e tom, não substitui contexto factual. Mais top_k não significa mais qualidade (ruído, tokens, latência) e a posição da evidência no contexto pode influenciar."]},
+{t:"Decomposição, roteamento e verificação",p:["Prompt monolítico faz várias tarefas de uma vez; decomposição e chaining separam etapas, cada uma com prompt, modelo e regra próprios.","Roteamento classifica a intenção (DISCIPLINA ou FORA_DO_ESCOPO) antes da recuperação. Verificação é uma segunda chamada que checa se a resposta é sustentada pelo contexto e pode desviar para rejeição.","Prompts são versionados e avaliados em conjunto fixo de casos (qualidade, formato, abstenção, latência, tokens, robustez a injeção, estabilidade)."]}]},
+{n:"6. Avaliação de RAG e compressão",s:[
+{t:"Métricas de retrieval",p:["Context Recall = chunks relevantes recuperados dividido pelo total de relevantes (necessários: A e B, recuperados: A, C, D dá 0,50).","Context Precision (rank-aware): média de Precision@posição nos itens relevantes. Ranking relevante, irrelevante, relevante: (1,00 + 0,67) / 2 = 0,83.","Top-k maior tende a subir recall e baixar precision. Ambas dependem das anotações de chunks relevantes."]},
+{t:"Métricas de geração e diagnóstico",p:["Faithfulness = afirmações suportadas pelo contexto dividido pelo total de afirmações (LLM juiz). Answer Relevancy: score de 0 a 1 de quanto a resposta atende à pergunta, sem avaliar factualidade.","Recall baixo: evidência não recuperada. Recall alto e precision baixa: ruído. Faithfulness baixa: gerador inventa. Relevancy baixa com fidelidade alta: resposta fiel, mas fora da pergunta. Recall e precision apontam para retrieval; faithfulness e relevancy, para generation.","Limitações: LLM juiz varia, médias escondem casos críticos; combinar com inspeção e avaliação humana."]},
+{t:"Compressão orientada à recuperação",p:["Preservação literal exige compressão lossless (gzip): reduz espaço em disco, mas não tokens, chunks nem embeddings. Preservação funcional mantém evidência para responder perguntas.","Resumo genérico perde detalhes de alto valor (23h59, 48 horas, 75%, exceções, negações). Retrieval-aware preserva números, datas, condições, exceções, proibições e permissões, removendo redundância; foca em answerability.","Arquitetura híbrida: versão comprimida indexada para busca e original em gzip vinculado, recuperado sob demanda. Risco de compressão pode ser adaptativo por documento. Se as perguntas futuras são imprevisíveis, preferir preservar o original."]}]}
+];
+const Q=[];
+const m=(d,q,o,a,e)=>Q.push({d,t:"mc",q,o,a,e});
+const v=(d,q,a,e)=>Q.push({d,t:"vf",q,o:["Verdadeiro","Falso"],a:a?0:1,e});
+m(0,"Na self-supervision, de onde vêm os rótulos de treinamento?",["De anotadores especializados","Dos próprios dados, como o próximo token","De um reward model","De regras escritas à mão"],1,"Os rótulos são derivados do próprio dado.");
+v(0,"Self-supervision é o mesmo que aprendizado não supervisionado.",false,"Os rótulos existem, mas são derivados do dado.");
+m(0,"Um modelo autorregressivo prevê:",["Tokens ausentes usando contexto anterior e posterior","O próximo token usando apenas os tokens anteriores","A classe de uma imagem","A ordem das sentenças"],1,"Autorregressivo usa só o contexto anterior.");
+v(0,"BERT é um masked language model, adequado a tarefas que exigem compreensão global da sequência.",true,"Modelos mascarados veem contexto anterior e posterior.");
+m(0,"O foco da Engenharia de IA, em relação ao ML Engineering tradicional, é:",["Treinar modelos próprios do zero","Selecionar, adaptar, integrar, avaliar e operar modelos existentes","Apenas pesquisar arquiteturas","Eliminar software tradicional"],1,"O modelo é só um componente do sistema.");
+v(0,"Aplicações internas e tarefas fechadas, como classificação, tendem a ser implantadas primeiro.",true,"São mais controláveis e fáceis de avaliar.");
+m(0,"As três técnicas de adaptação de um foundation model são:",["Prompt engineering, RAG e finetuning","SFT, RLHF e DPO","Tokenização, atenção e MLP","Greedy, top-k e top-p"],0,"Podem ser combinadas.");
+v(0,"Para escalar um modelo basta aumentar parâmetros; dados e computação são irrelevantes.",false,"Escala coordena modelo, dados e computação.");
+m(1,"Segundo a lei Chinchilla (regra do capítulo), os tokens de treino devem ser perto de:",["2 vezes os parâmetros","20 vezes os parâmetros","200 vezes os parâmetros","O mesmo número de parâmetros"],1,"Treino compute-optimal.");
+v(1,"Um modelo de 7B parâmetros em 16 bits exige cerca de 14 GB apenas para os pesos.",true,"7 bilhões × 2 bytes.");
+m(1,"Em Mixture-of-Experts:",["Todos os parâmetros são ativados","Cada token aciona apenas alguns especialistas","Há um único especialista","Os parâmetros totais são zero"],1,"Separar parâmetros totais de ativos.");
+m(1,"O SFT (Supervised Finetuning) usa:",["Pares prompt e resposta de demonstração","Respostas vencedora e perdedora","Texto bruto da web","Apenas embeddings"],0,"Comparações vencedora/perdedora são de preference finetuning.");
+v(1,"DPO otimiza diretamente preferências entre respostas, simplificando o RLHF.",true,"Dispensa reinforcement learning explícito.");
+m(1,"Temperatura baixa tende a produzir:",["Mais criatividade e variabilidade","Saídas mais consistentes e possivelmente repetitivas","Contexto maior","Desativação da amostragem"],1,"Útil para precisão e classificação.");
+v(1,"Top-p considera o menor conjunto de tokens cuja probabilidade acumulada atinge o limiar p.",true,"Top-k fixa a quantidade; top-p fixa a massa.");
+m(1,"Constrained sampling é:",["Limitar a geração a tokens compatíveis com uma gramática","Gerar N respostas e escolher a melhor","Aumentar a temperatura","Corrigir chaves ausentes depois"],0,"A segunda opção descreve best-of-N.");
+v(1,"Um modelo treinado majoritariamente em inglês pode ter desempenho inferior em línguas pouco representadas.",true,"Dados e tokenização são desiguais.");
+m(2,"Nas práticas, a imagem é enviada à API como:",["Caminho do arquivo local","Data URL em base64 em image_url","Bytes brutos no texto","Link do Google Drive"],1,"A função image_to_data_url gera data:mime;base64.");
+v(2,"reasoning_effort=none foi usado para desligar o raciocínio interno do modelo.",true,"Evita gastar tokens em raciocínio.");
+m(2,"O papel do Pydantic na aplicação é:",["Gerar o JSON","Validar o contrato de saída no lado da aplicação","Treinar o modelo","Classificar imagens"],1,"O prompt descreve; o Pydantic valida.");
+m(2,"Few-shot significa:",["Alterar pesos do modelo","Incluir exemplos no prompt","Exigir finetuning","Usar só temperatura alta"],1,"A adaptação ocorre no contexto da chamada.");
+m(2,"response_format json_object serve para:",["Receber saída JSON que o código lê com json.loads","Gerar imagens","Ativar RAG","Definir top_k"],0,"Conecta o modelo ao código.");
+v(2,"Na triagem de chamados, a resposta do modelo deve ser usada pelo código em etapas seguintes, e não só exibida como chatbot.",true,"Requisito do exercício.");
+v(2,"Carregar um modelo GGUF com llama_cpp executa o modelo na nuvem da Groq.",false,"A execução é local.");
+m(3,"A ordem correta do pipeline RAG é:",["documentos, chunks, embeddings, índice FAISS, recuperação, contexto, LLM, resposta","chunks, LLM, embeddings, contexto, FAISS","embeddings, resposta, chunks, documentos","recuperação, documentos, LLM, FAISS"],0,"O retriever não usa LLM.");
+m(3,"IndexFlatIP com embeddings normalizados equivale a:",["Distância euclidiana","Similaridade de cosseno","BM25","Hash"],1,"Produto interno de vetores unitários.");
+v(3,"FAISS sempre retorna vizinhos, mesmo que nenhum chunk contenha evidência suficiente.",true,"Por isso se usa limiar ou prompt de abstenção.");
+m(3,"A dimensão do embedding paraphrase-multilingual-MiniLM-L12-v2 é:",["128","384","768","1536"],1,"Exibida nas práticas.");
+v(3,"Com tamanho 55 e overlap 12, o início de cada chunk avança 43 palavras.",true,"55 menos 12.");
+m(3,"Sobre prompt injection em RAG:",["Texto recuperado pode conter instruções; o contexto deve ser tratado como dado não confiável","É um erro de embedding","É um limite de tokens","Só ocorre sem FAISS"],0,"Conteúdo recuperado pode parecer instrução.");
+v(3,"Delimitadores e prompts defensivos constituem isolamento de segurança completo.",false,"Ajudam, mas exigem controles fora do modelo.");
+m(3,"O tamanho aproximado do índice vetorial é:",["Chunks × dimensão × 4 bytes","Chunks + dimensão","Documentos × 4","Palavras × dimensão"],0,"float32 usa 4 bytes por dimensão.");
+m(4,"Um nó do LangGraph retorna:",["O estado completo","Apenas os campos que deseja atualizar","Uma string","Uma aresta"],1,"O LangGraph mescla a atualização no estado.");
+m(4,"Qual método cria roteamento condicional?",["add_edge","add_conditional_edges","compile","invoke"],1,"Recebe uma função de decisão e um mapa de rotas.");
+v(4,"No RAG condicional, com score abaixo do limiar o nó de geração nem é executado.",true,"Vai para o nó sem evidência.");
+v(4,"O limiar de evidência é universal, independente do embedding e da base.",false,"Deve ser calibrado com avaliação.");
+m(4,"stream_mode updates mostra:",["O que cada nó acrescenta ao estado","Tokens um a um","Imagens","O custo em dólares"],0,"Útil para inspeção.");
+m(4,"A anatomia de um prompt de aplicação é:",["Papel, tarefa, contexto, restrições e contrato de saída","Apenas a pergunta","Temperatura e top_k","Embedding e índice"],0,"System guarda regras permanentes.");
+v(4,"Prompt chaining divide a tarefa em etapas, cada uma com prompt e regras próprios.",true,"Contrasta com o prompt monolítico.");
+m(4,"A verificação de resposta é:",["Segunda chamada ao modelo que checa suporte no contexto e pode rotear para rejeição","Substituição da recuperação","Redução de tokens","Indexação"],0,"Responsabilidade separada da geração.");
+v(4,"Uma persona substitui a necessidade de contexto factual.",false,"Altera tom e perspectiva, não fatos.");
+m(5,"Context Recall é:",["Afirmações suportadas dividido pelo total","Chunks relevantes recuperados dividido pelo total de relevantes","Média de Precision@k","Score 0 a 1 de um juiz"],1,"Mede se a evidência necessária chegou.");
+v(5,"Ranking relevante, irrelevante, relevante resulta em Context Precision de cerca de 0,83.",true,"(1,00 + 0,67) / 2.");
+m(5,"Faithfulness mede:",["Se a resposta atende à pergunta","Se as afirmações são sustentadas pelo contexto recuperado","A posição dos chunks","O tempo de resposta"],1,"Não verifica a verdade no mundo real.");
+v(5,"Uma resposta pode ser fiel ao contexto e ainda ter baixa Answer Relevancy.",true,"Fidelidade e relevância são distintas.");
+m(5,"Recall alto, precision alta e faithfulness baixa indicam:",["Evidência não recuperada","Muito ruído no contexto","Gerador adicionando conteúdo sem suporte","Pipeline consistente"],2,"Problema em generation/prompting.");
+v(5,"Aumentar top_k tende a elevar o recall, mas pode reduzir a precision.",true,"Mais chunks trazem mais ruído.");
+m(5,"Sobre gzip na compressão de documentos:",["Reduz tokens e chunks","Preserva o original, mas não reduz tokens, chunks nem embeddings","Descarta números","Remove exceções"],1,"É lossless e vale para armazenamento frio.");
+v(5,"Na arquitetura híbrida, a versão retrieval-aware é indexada e o original fica em gzip vinculado.",true,"O original é recuperado sob demanda.");
+m(5,"O principal risco do resumo genérico para RAG é:",["Perder detalhes de alto valor como 23h59, 48 horas e 75%","Aumentar o texto","Preservar tudo","Gerar embeddings maiores"],0,"Informação curta não é informação pouco importante.");
+v(5,"Médias altas de métricas garantem que não há casos críticos com desempenho baixo.",false,"Médias escondem casos ruins.");
+const $=s=>document.querySelector(s);
+const st={tab:"teoria",mod:0,list:[],ans:[],done:false,imm:true,started:false};
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+function nav(){
+$("#nav").innerHTML=[["teoria","Teoria"],["revisao","Revisão"],["simulado","Simulado"]].map(x=>`<button class="${st.tab===x[0]?"on":""}" data-t="${x[0]}">${x[1]}</button>`).join("");
+$("#nav").querySelectorAll("button").forEach(b=>b.onclick=()=>{st.tab=b.dataset.t;st.started=false;st.done=false;if(st.tab==="revisao")startRev();render()});
+}
+function chips(all){
+return `<div class="chips">${all?`<button class="${st.mod===-1?"on":""}" data-m="-1">Todos</button>`:""}${M.map((x,i)=>`<button class="${st.mod===i?"on":""}" data-m="${i}">${x.n}</button>`).join("")}</div>`;
+}
+function bindChips(fn){document.querySelectorAll(".chips button").forEach(b=>b.onclick=()=>{st.mod=+b.dataset.m;fn()})}
+function theory(){
+const x=M[st.mod];
+$("#app").innerHTML=chips(false)+`<h2>${x.n}</h2>`+x.s.map((s,i)=>`<details ${i===0?"open":""}><summary>${s.t}</summary>${s.p.map(p=>`<p>${p}</p>`).join("")}</details>`).join("");
+bindChips(theory);
+}
+function startRev(){
+const l=st.mod===-1?Q:Q.filter(q=>q.d===st.mod);
+st.list=shuffle(l);st.ans=st.list.map(()=>null);st.done=false;st.imm=true;st.started=true;
+}
+function cards(){
+return st.list.map((q,i)=>{
+const show=st.imm?st.ans[i]!==null:st.done;
+const opts=q.o.map((o,j)=>{
+let c="o";
+if(show){if(j===q.a)c+=" right";else if(st.ans[i]===j)c+=" wrong"}else if(st.ans[i]===j)c+=" sel";
+return `<button class="${c}" data-i="${i}" data-j="${j}">${o}</button>`}).join("");
+const ex=show?`<div class="ex">${st.ans[i]===q.a?"Correto. ":"Incorreto. "}${q.e}</div>`:"";
+return `<div class="q"><div class="tag">${M[q.d].n} | ${q.t==="vf"?"Julgue a asserção":"Múltipla escolha"} | Questão ${i+1}</div><p>${q.q}</p>${opts}${ex}</div>`}).join("");
+}
+function score(){return st.list.reduce((s,q,i)=>s+(st.ans[i]===q.a?1:0),0)}
+function quiz(){
+const n=st.list.length;
+let top="";
+if(st.imm){const r=st.ans.filter(a=>a!==null).length;top=`<div class="bar"><span>Respondidas: ${r} de ${n}. Acertos: ${score()}</span><button class="go" id="rs">Embaralhar e reiniciar</button></div>`}
+else if(st.done){const s=score();top=`<div class="res"><b>${s} de ${n}</b> (${Math.round(100*s/n)}%)<br>Revise abaixo as respostas e as explicações.</div><div class="bar"><button class="go" id="rs">Novo simulado</button></div>`}
+else{const r=st.ans.filter(a=>a!==null).length;top=`<div class="bar"><span>Respondidas: ${r} de ${n}</span></div>`}
+const end=(!st.imm&&!st.done)?`<button class="go" id="fin">Finalizar simulado</button>`:"";
+$("#app").innerHTML=(st.tab==="revisao"?chips(true):"")+top+cards()+end;
+if(st.tab==="revisao")bindChips(()=>{startRev();quiz()});
+document.querySelectorAll(".o").forEach(b=>b.onclick=()=>{
+const i=+b.dataset.i;
+if(st.done||(st.imm&&st.ans[i]!==null))return;
+st.ans[i]=+b.dataset.j;
+const y=window.scrollY;quiz();window.scrollTo(0,y)});
+const rs=$("#rs");if(rs)rs.onclick=()=>{if(st.imm){startRev();quiz()}else{st.started=false;st.done=false;render()}};
+const f=$("#fin");if(f)f.onclick=()=>{st.done=true;quiz();window.scrollTo(0,0)};
+}
+function review(){quiz()}
+function simSetup(){
+$("#app").innerHTML=`<h2>Simulado</h2><p>Sem feedback durante a prova. O resultado e as explicações aparecem ao finalizar.</p><div class="bar"><label>Escopo <select id="sc"><option value="-1">Todos os módulos</option>${M.map((x,i)=>`<option value="${i}">${x.n}</option>`).join("")}</select></label><label>Questões <select id="nq"><option>10</option><option>20</option><option>30</option><option value="999">Todas</option></select></label><button class="go" id="go">Iniciar simulado</button></div>`;
+$("#go").onclick=()=>{
+const sc=+$("#sc").value,nq=+$("#nq").value;
+const l=sc===-1?Q:Q.filter(q=>q.d===sc);
+st.list=shuffle(l).slice(0,nq);st.ans=st.list.map(()=>null);st.done=false;st.imm=false;st.started=true;
+quiz();window.scrollTo(0,0);
+};
+}
+function render(){
+nav();
+if(st.tab==="teoria")theory();
+else if(st.tab==="revisao"){if(!st.started)startRev();review()}
+else{if(st.started&&!st.imm)quiz();else simSetup()}
+}
+render();
+</script>
+</body>
+</html>
